@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
+import linklist.LinkReverseTest;
 import linklist.Node;
 import linklist.SinglyLinkedlist;
 
@@ -26,6 +27,10 @@ public class MainActivity extends AppCompatActivity {
             Node node = list.get(i);
             Log.d("tag", "打印出=" + node.data);
         }
+
+        //单链表反转测试
+        LinkReverseTest linkReverseTest =new LinkReverseTest();
+        linkReverseTest.reverse();
 
     }
 }

@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.test).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                insertTest();
+                Log.d(TAG, "onClick: 翻转字符串="+Sort.reversalCharsForStack("liuxingrong"));
             }
         });
 

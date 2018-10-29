@@ -1,5 +1,7 @@
 package com.arith;
 
+import java.util.Stack;
+
 /**
  * 排序算法
  */
@@ -105,5 +107,23 @@ public class Sort {
         }
         return array;
 
+    }
+
+    /**
+     * 利用栈的后进先出原理，将一个字符串翻转
+     *
+     * @return
+     */
+    public static String reversalCharsForStack(String str) {
+        Stack stack = new Stack();
+        char[] chars = str.toCharArray();
+        //首先push进去
+        for (char c : chars) {
+            stack.push(c);
+        }
+        for (int i = 0; i < chars.length; i++) {
+            chars[i] = (char) stack.pop();
+        }
+        return new String(chars);
     }
 }

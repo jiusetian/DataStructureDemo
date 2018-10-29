@@ -10,8 +10,13 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.datastructuredemo.MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <Button
+        android:id="@+id/test"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello World!" />
+        android:text="点击测试"
+        android:padding="10dp"
+        android:textSize="16sp"
+        android:layout_centerInParent="true"
+        />
 </RelativeLayout>

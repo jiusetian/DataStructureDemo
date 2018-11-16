@@ -1,4 +1,4 @@
-package com.arith;
+package math;
 
 import java.util.Stack;
 

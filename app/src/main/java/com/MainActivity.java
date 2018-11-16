@@ -1,12 +1,13 @@
-package com.datastructuredemo;
+package com;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 
-import com.arith.Sort;
+import com.datastructuredemo.R;
 
+import math.Sort;
 import linklist.SinglyLinkedlist;
 
 public class MainActivity extends AppCompatActivity {
@@ -42,32 +43,4 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    //冒泡排序
-    private void bubbleTest() {
-        Log.d(TAG, "bubbleTest: 进行排序");
-        int[] array = new int[]{2, 54, 23, 6, 23, 1, 7, 34, 4};
-        int[] sort = Sort.bubbleSort(array);
-        for (int i : sort) {
-            Log.d(TAG, "bubbleTest: 排序后的数据="+i);
-        }
-    }
-
-    //选择排序
-    private void selectTest(){
-        Log.d(TAG, "bubbleTest: 进行排序");
-        int[] array = new int[]{2, 54, 23, 6, 23, 1, 7, 34, 4};
-        int[] sort = Sort.selectSort(array);
-        for (int i : sort) {
-            Log.d(TAG, "bubbleTest: 排序后的数据="+i);
-        }
-    }
-
-    private void insertTest(){
-        Log.d(TAG, "bubbleTest: 进行排序");
-        int[] array = new int[]{2, 54, 23, 6, 23, 1, 7, 34, 4};
-        int[] sort = Sort.insertSort(array);
-        for (int i : sort) {
-            Log.d(TAG, "bubbleTest: 排序后的数据="+i);
-        }
-    }
 }

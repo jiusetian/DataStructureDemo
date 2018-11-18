@@ -1,3 +1,2 @@
 # DataStructureDemo
-数据结构学习
-Java数据结构
+java数据结构和算法系列

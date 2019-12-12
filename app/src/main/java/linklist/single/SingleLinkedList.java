@@ -124,6 +124,10 @@ public class SingleLinkedList {
         return size==0;
     }
 
+    public int size(){
+        return size;
+    }
+
 
     /**
      * 链表的节点

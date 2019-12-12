@@ -1,4 +1,7 @@
-package linklist;
+package linklist.single;
+
+import linklist.ComException;
+import linklist.Node;
 
 /**
  * 自定义单向链表

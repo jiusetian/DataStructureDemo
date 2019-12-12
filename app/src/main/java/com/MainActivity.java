@@ -8,7 +8,7 @@ import android.view.View;
 import com.datastructuredemo.R;
 
 import math.Sort;
-import linklist.SinglyLinkedlist;
+import linklist.single.SinglyLinkedlist;
 
 public class MainActivity extends AppCompatActivity {
     private String TAG = getClass().getSimpleName();

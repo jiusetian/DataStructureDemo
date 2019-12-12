@@ -1,17 +1,17 @@
-package linklist.doublelinked;
+package linklist.cyclelink;
 
 /**
  * Author：Alex
  * Date：2019/12/12
- * Note：双向链表
+ * Note：双向循环链表
  */
-public class DoubleLinkedList {
+public class CycleDoubleLinkList {
 
     private Node header;
     private Node tail;
     private int size;
 
-    public DoubleLinkedList() {
+    public CycleDoubleLinkList() {
         header = null;
         tail = null;
         size = 0;
@@ -28,8 +28,15 @@ public class DoubleLinkedList {
         if (size == 0) { //没有元素
             header = node;
             tail = node;
+            //头节点的前一个节点是尾节点，尾节点的后一个节点是头节点
+            header.prev=tail;
+            tail.next=header;
             size++;
         } else {
+            //头节点的前一个节点是尾节点，尾节点的后一个节点是头节点
+            node.prev=tail;
+            tail.next=node;
+            //改变header
             node.next = header;
             header.prev = node;
             header = node;
@@ -49,11 +56,17 @@ public class DoubleLinkedList {
         if (size == 0) { //没有数据的情况下
             header = node;
             tail = node;
+            //头节点的前一个节点是尾节点，尾节点的后一个节点是头节点
+            header.prev=tail;
+            tail.next=header;
             size++;
         } else {
             tail.next = node;
             node.prev = tail;
             tail = node;
+            //头节点的前一个节点是尾节点，尾节点的后一个节点是头节点
+            header.prev=tail;
+            tail.next=header;
             size++;
         }
     }
@@ -74,6 +87,9 @@ public class DoubleLinkedList {
         } else {
             header.next.prev = null;
             header = header.next;
+            //头节点的前一个节点是尾节点，尾节点的后一个节点是头节点
+            header.prev=tail;
+            tail.next=header;
         }
         size--;
         return data;
@@ -94,6 +110,9 @@ public class DoubleLinkedList {
         } else {
             tail.prev.next = null;
             tail = tail.prev;
+            //头节点的前一个节点是尾节点，尾节点的后一个节点是头节点
+            header.prev=tail;
+            tail.next=header;
         }
         size--;
         return data;

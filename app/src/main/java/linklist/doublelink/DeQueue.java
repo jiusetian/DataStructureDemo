@@ -1,4 +1,4 @@
-package linklist.doublelinked;
+package linklist.doublelink;
 
 /**
  * Author：Alex

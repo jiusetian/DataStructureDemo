@@ -33,7 +33,16 @@ public class SortTest {
     public void insertTest() {
         Log.d(TAG, "bubbleTest: 进行排序");
         int[] array = new int[]{2, 4, 3, 1, 7, 9, 11,3025,35,5234,523,54,23,456, 8, 11, 5, 10, 12};
-        int[] sort = Sort.insertSort2(array);
+        int[] sort = Sort.insertSort3(array);
+        for (int i : sort) {
+            Log.d(TAG, "bubbleTest: 排序后的数据=" + i);
+        }
+    }
+
+    public void shellSort(){
+        Log.d(TAG, "bubbleTest: 进行排序");
+        int[] array = new int[]{2, 4, 3, 1, 7, 9, 11,3025,35,5234,523,54,23,456, 8, 11, 5, 10, 12};
+        int[] sort = Sort.shellSort3(array);
         for (int i : sort) {
             Log.d(TAG, "bubbleTest: 排序后的数据=" + i);
         }

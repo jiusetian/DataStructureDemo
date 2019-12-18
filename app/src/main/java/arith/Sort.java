@@ -13,7 +13,7 @@ public class Sort {
      * 冒泡排序法
      * <p>
      * 算法思想：依次比较两个元素，挑出大的那个元素往后移动并且再跟后面的元素比较，最后得到最大的元素并且被移动到了最后面
-     *
+     * <p>
      * 1.首先有一个参与比较的元素，我们叫它基准元素吧，这个元素的初始值是数组的第一个元素
      * 2.将基准元素和它下一个元素进行比较，如果基准元素大于下一个元素，则交换这两个元素的位置，然后将大的那个元素赋值给基准元素
      * 3.如此一直都是将大的元素再和下一个元素比较，而且大的元素排到两个比较元素的后面，到最后数组中最大的那个元素就排到数组后面了
@@ -87,7 +87,8 @@ public class Sort {
      * 选择排序法
      * <p>
      * 基本思想：取前面的元素和下一个元素进行比较，取小的那个元素又跟下一个元素比较，一轮比较下来就得到了最小的那个元素，然后再与刚开始的前面那个元素交换
-     *
+     * 遍历数组，遍历到i时，a0,a1...ai-1是已经排好序的，然后从i到n选择出最小的，记录下位置，如果最小的不是ai，则将它和ai交换
+     * <p>
      * 1.首先有一个基准元素，其初始值是开始排序比较的数组的第一个元素
      * 2.将基准元素和下一个元素进行比较，如果下一个元素小于基准元素，则将下一个元素赋值给基准元素
      * 3.一轮比较下来，基准元素就是数组中最小的那个元素了，然后将基准元素跟第一个元素交换
@@ -110,6 +111,7 @@ public class Sort {
                     c = j;
                 }
             }
+
             //一轮比较结束，如果有比基准元素更小的元素，则将其与第一个元素交换
             if (c != i) {
                 int temp = array[i];
@@ -158,10 +160,11 @@ public class Sort {
      * <p>
      * 算法思想：从第二个元素依次取出来跟它前面的元素进行比较，比较顺序是从后往前，如果当前元素小于被比较元素，则将被比较元素后移一位，否则当前元素
      * 插入到被比较元素的后面
-     *
+     * <p>
      * 1.首先有个基准元素，初始值为数组的第二个元素
      * 2.将基准元素从前面已经排序好的数组的最后一个元素开始比较，目的是找到一个可以插入的位置，如果基准元素小于被比较元素，代表还不能插入，此时
      * 将被比较元素后移一位，如果基准元素大于或等于被比较元素，此时代表可以插入了，将基准元素插入到被比较元素的后面
+     * 3.当待排序的数据基本有序时，插入排序的效率比较高，只需要进行很少的数据移动
      *
      * @param array
      * @return
@@ -175,12 +178,44 @@ public class Sort {
             for (int j = i - 1; j >= 0; j--) {
                 //基准元素小于被比较元素的时候，代表还不能插入
                 if (current < array[j]) {
-                    array[j+1] = array[j]; //往后移动一位
+                    array[j + 1] = array[j]; //往后移动一位
                     pos = j;
                 } else { //当基准元素大于或等于被比较元素时，代表可以插入了，跳出循环
                     break;
                 }
             }
+
+            //插入
+            array[pos] = current;
+
+        }
+        return array;
+    }
+
+    public static int[] insertSort3(int[] array) {
+
+        for (int i = 1; i < array.length; i++) {
+            int current = array[i]; //基准元素
+            int pos = i; //插入位置，初始值为基准元素的下标值
+            int j = i;
+            //从基准元素的前一个元素开始比较
+
+            while (j - 1 >= 0 && array[j - 1] > current) {
+                array[j] = array[j - 1]; //往后移动一位
+                j--;
+                pos = j;
+            }
+
+//            for (int j = i - 1; j >= 0; j--) {
+//
+//                //基准元素小于被比较元素的时候，代表还不能插入
+//                if (current < array[j]) {
+//                    array[j + 1] = array[j]; //往后移动一位
+//                    pos = j;
+//                } else { //当基准元素大于或等于被比较元素时，代表可以插入了，跳出循环
+//                    break;
+//                }
+//            }
 
             //插入
             array[pos] = current;
@@ -241,4 +276,131 @@ public class Sort {
         }
         return new String(chars);
     }
+
+
+    /**
+     * 希尔排序
+     *
+     * @param
+     * @return
+     */
+    public static int[] shellSort(int[] array) {
+
+        int len = array.length;
+        int temp;
+        //当gap等于多少，相当于将原数组分为多少组，比如gap==2，就是将数组分为2组，然后分别对这两组进行插入排序
+        int gap = len / 2;
+
+        while (gap > 0) {
+
+            //当gap==1的时候，就相当于一个插入排序
+            for (int i = gap; i < len; i++) {
+                temp = array[i];
+                //插入位置的前gap位
+                int preIndex = i - gap;
+
+                while (preIndex >= 0 && array[preIndex] > temp) {
+                    //移位
+                    array[preIndex + gap] = array[preIndex];
+                    preIndex -= gap;
+                }
+                //进行插入
+                array[preIndex + gap] = temp;
+            }
+
+            gap /= 2;
+        }
+
+        return array;
+    }
+
+
+    /**
+     *
+     * @param array
+     * @return
+     */
+    public static int[] shellSort2(int[] array) {
+
+        //gap的初始值,此时数组分为array.length/2个分组
+        int gap = array.length / 2;
+
+        while (gap > 0) {
+
+            int current; //基准元素
+            int pos; //插入位置
+            //
+            for (int i = gap; i < array.length; i++) {
+                //Log.d(TAG, "shellSort2: gap为="+gap);
+                current = array[i];
+                pos = i;
+                int j = i; //当前位置插入位置
+
+                while (j - gap >= 0 && array[j - gap] > current) {
+                    //移动位置
+                    array[j] = array[j - gap];
+                    j -= gap;
+                    pos = j;
+                }
+
+                //插入
+                array[pos] = current;
+            }
+
+            gap /= 2;
+        }
+
+        return array;
+    }
+
+    /**
+     * 希尔排序
+     * <p>
+     * 基本思想：通过将数组分组然后分别对每分组进行插入排序来简化排序的时间复杂度，分组数量依次减少，按照gap依次等于{n/2,(n/2)/2...1}的规律来决定分组的数量
+     * 但是分组的元素不是连续的，而是分别抽取gap大小的间隔来分配分组的元素
+     * <p>
+     * 1.同样首先有个基准元素，因为gap就是数组的分组数，基准元素的初始值在逻辑上第一个分组的第二个元素
+     * 2.在进行比较的时候，基准元素的前一个值在逻辑上是分组中的前一个值，而不是数组中的前一个值，因为分组元素在以数组来算的话它们是间隔gap大小的，所以基准元素
+     * 在比较的时候应该以数组来算的话是跟前gap个元素进行比较
+     * 3.此时就进入了插入排序的逻辑了
+     * 4.当gap为0的时候结束排序
+     *
+     * @param array
+     * @return
+     */
+    public static int[] shellSort3(int[] array) {
+
+        //gap的初始值,此时数组分为array.length/2个分组
+        int gap = array.length / 2;
+
+        while (gap > 0) {
+
+            int current; //基准元素
+            int pos; //插入位置
+            //
+            for (int i = gap; i < array.length; i++) {
+
+                current = array[i];
+                pos = i;
+
+                //分组的插入排序，j为分组中元素在数组中的下标值，因为分组元素下标其实是间隔gap大小的，所以每次的下一个分组元素的下标是j-gap
+                for (int j = i - gap; j >= 0; j -= gap) {
+
+                    if (current < array[j]) { //移位
+                        array[j + gap] = array[j];
+                        pos = j;
+                    } else { //可以插入，跳出
+                        break;
+                    }
+                }
+                //插入
+                array[pos] = current;
+            }
+
+            gap /= 2;
+        }
+
+        return array;
+    }
+
 }

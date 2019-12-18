@@ -6,7 +6,7 @@ import android.view.View;
 
 import com.datastructuredemo.R;
 
-import binarytree.BinaryTree;
+import arith.SortTest;
 import linklist.singlelink.SingleLinkedList;
 
 public class MainActivity extends AppCompatActivity {
@@ -23,7 +23,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //Log.d(TAG, "onClick: 翻转字符串=" + Sort.reversalCharsForStack("liuxingrong"));
-                BinaryTree.binaryTreeTest();
+                //BinaryTree.binaryTreeTest();
+                new SortTest().insertTest();
             }
         });
 

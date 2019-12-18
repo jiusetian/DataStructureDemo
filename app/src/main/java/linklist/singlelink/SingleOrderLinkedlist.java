@@ -1,13 +1,11 @@
-package linklist.single;
+package linklist.singlelink;
 
-import linklist.ComException;
-import linklist.Node;
 
 /**
- * 自定义单向链表
+ * 按顺序插入的单向链表
  */
 
-public class SinglyLinkedlist {
+public class SingleOrderLinkedlist {
 
     private Node header; //链表的头部
 
@@ -65,7 +63,7 @@ public class SinglyLinkedlist {
 
         //首先判断插入的位置是否合法
         if (index < 1 || index > length() + 1) {
-            new ComException("插入位置不合法");
+            new Exception("插入位置不合法");
             return;
         }
 
@@ -101,7 +99,7 @@ public class SinglyLinkedlist {
     public void removeNodeByIndex(int index){
         //判断index是否合法
         if (index<1||index>length()){
-            new ComException("删除的指定位置不合法");
+            new Exception("删除的指定位置不合法");
             return;
         }
 
@@ -120,6 +118,22 @@ public class SinglyLinkedlist {
             temp=temp.next;
         }
     }
+
+    private class Node {
+
+        //为了方便，这两个变量都使用public，而不用private就不需要编写get、set方法了。
+        //存放数据的变量，简单点，直接为int型
+        public int data;
+        //存放结点的变量,默认为null
+        public Node next;
+
+        //构造方法，在构造时就能够给data赋值
+        public Node(int data){
+            this.data = data;
+        }
+
+    }
+
 }
 
 

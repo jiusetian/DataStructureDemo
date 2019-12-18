@@ -1,4 +1,4 @@
-package linklist.single;
+package linklist.singlelink;
 
 /**
  * Author：Alex
@@ -110,21 +110,63 @@ public class SingleLinkedList {
     }
 
     /**
+     * 反转链表
+     */
+    public void reverse() {
+        header = reverse(header);
+    }
+
+    private Node reverse(Node head) {
+        // 当head没有前驱时，代表函数执行到最后一个节点了，此时开始返回结果并反转执行
+        if (head == null || head.next == null) {
+            return head;// 若为空链或者当前结点在尾结点，则直接返回
+        }
+        Node reHead = reverse(head.next);
+        //递归到最后此时这个head为倒数第二个节点，首先将最后一个节点的前驱设置倒数第二个节点，以此类推
+        head.next.next = head;// 将head下一个节点的前驱设置为head，即指向反转了
+        head.next = null;// 将head的前驱暂时设置为null
+        //最终reHead其实是原来链表的最后一个节点
+        return reHead;
+    }
+
+    /**
      * 显示链表元素
      */
-    public void display(){
-
+    public void display() {
+        if (size > 0) {
+            Node node = header;
+            int tempSize = size;
+            if (tempSize == 1) {//当前链表只有一个节点
+                System.out.println("[" + node.data + "]");
+                return;
+            }
+            while (tempSize > 0) {
+                if (node.equals(header)) {
+                    System.out.print("[" + node.data + "->");
+                } else if (node.next == null) {
+                    System.out.print(node.data + "]");
+                } else {
+                    System.out.print(node.data + "->");
+                }
+                node = node.next;
+                tempSize--;
+            }
+            System.out.println();
+        } else {//如果链表一个节点都没有，直接打印[]
+            System.out.println("[]");
+        }
     }
 
     /**
      * 判断链表是否为空
+     *
      * @return
      */
-    public boolean isEmpty(){
-        return size==0;
+    public boolean isEmpty() {
+        return size == 0;
     }
 
-    public int size(){
+    public int size() {
         return size;
     }
 

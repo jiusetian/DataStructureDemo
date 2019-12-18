@@ -1,17 +1,15 @@
-package com;
+package arith;
 
 import android.util.Log;
-
-import math.Sort;
 
 /**
  * Created by XR_liu on 2018/11/16.
  */
-public class MathTest {
+public class SortTest {
 
     String TAG="tag";
     //冒泡排序
-    private void bubbleTest() {
+    public void bubbleTest() {
         Log.d(TAG, "bubbleTest: 进行排序");
         int[] array = new int[]{2, 54, 23, 6, 23, 1, 7, 34, 4};
         int[] sort = Sort.bubbleSort(array);
@@ -21,7 +19,7 @@ public class MathTest {
     }
 
     //选择排序
-    private void selectTest(){
+    public void selectTest(){
         Log.d(TAG, "bubbleTest: 进行排序");
         int[] array = new int[]{2, 54, 23, 6, 23, 1, 7, 34, 4};
         int[] sort = Sort.selectSort(array);
@@ -31,7 +29,7 @@ public class MathTest {
     }
 
     //插入排序
-    private void insertTest(){
+    public void insertTest(){
         Log.d(TAG, "bubbleTest: 进行排序");
         int[] array = new int[]{2, 54, 23, 6, 23, 1, 7, 34, 4};
         int[] sort = Sort.insertSort(array);

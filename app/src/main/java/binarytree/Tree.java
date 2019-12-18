@@ -1,30 +1,32 @@
 package binarytree;
 
+
 /**
- * Created by XR_liu on 2018/11/18.
+ * Author：Alex
+ * Date：2019/12/13
+ * Note：
  */
 public interface Tree {
 
     //查找节点
-    public Node find(int key);
+    public BinaryTree.Node find(int key);
     //插入新节点
     public boolean insert(int data);
 
     //中序遍历
-    public void infixOrder(Node current);
+    public void infixOrder(BinaryTree.Node current);
     //前序遍历
-    public void preOrder(Node current);
+    public void preOrder(BinaryTree.Node current);
     //后序遍历
-    public void postOrder(Node current);
+    public void postOrder(BinaryTree.Node current);
 
     //查找最大值
-    public Node findMax();
+    public BinaryTree.Node findMax();
     //查找最小值
-    public Node findMin();
+    public BinaryTree.Node findMin();
 
     //删除节点
     public boolean delete(int key);
 
     //......
-
 }

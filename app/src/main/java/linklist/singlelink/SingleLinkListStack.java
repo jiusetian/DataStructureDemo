@@ -1,4 +1,4 @@
-package linklist.single;
+package linklist.singlelink;
 
 /**
  * Author：Alex

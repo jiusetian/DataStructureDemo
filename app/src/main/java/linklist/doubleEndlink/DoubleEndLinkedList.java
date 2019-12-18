@@ -1,4 +1,4 @@
-package linklist.doubleEnd;
+package linklist.doubleEndlink;
 
 /**
  * Author：Alex

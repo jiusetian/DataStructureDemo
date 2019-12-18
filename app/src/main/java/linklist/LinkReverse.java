@@ -3,12 +3,12 @@ package linklist;
 import android.util.Log;
 
 /**
- * Created by Administrator on 2018/4/10.
+ *  链表反转
  */
 
-public class LinkReverseTest {
+public class LinkReverse {
 
-    public void reverse() {
+    public void reverseLink() {
         Node head = new Node(0);
         Node node1 = new Node(1);
         Node node2 = new Node(2);
@@ -24,7 +24,7 @@ public class LinkReverseTest {
             h = h.getNext();
         }
         // 调用反转方法
-        head = Reverse1(head);
+        head = reverse(head);
 
         // 打印反转后的结果
         while (null != head) {
@@ -41,16 +41,20 @@ public class LinkReverseTest {
      * null
      * 2.此时倒数第二个节点的next设置为倒数第三个，
      * 3.以此类推
+     *
+     *
      */
-    public static Node Reverse1(Node head) {
-        // head看作是前一结点，head.getNext()是当前结点，reHead是反转后新链表的头结点
+    public static Node reverse(Node head) {
+        // 当head没有前驱时，代表函数执行到最后一个节点了，此时开始返回结果并反转执行
         if (head == null || head.getNext() == null) {
-            return head;// 若为空链或者当前结点在尾结点，则直接还回
+            return head;// 若为空链或者当前结点在尾结点，则直接返回
         }
-        Node reHead = Reverse1(head.getNext());// 先反转后续节点head.getNext()
-        head.getNext().setNext(head);// 将当前结点的指针域指向前一结点
-        head.setNext(null);// 前一结点的指针域令为null;
-        return reHead;// 反转后新链表的头结点
+        Node reHead = reverse(head.getNext());
+        //递归到最后此时这个head为倒数第二个节点，首先将最后一个节点的前驱设置倒数第二个节点，以此类推
+        head.getNext().setNext(head);// 将head下一个节点的前驱设置为head，即指向反转了
+        head.setNext(null);// 将head的前驱暂时设置为null
+        //最终reHead其实是原来链表的最后一个节点
+        return reHead;
     }
 
     class Node {

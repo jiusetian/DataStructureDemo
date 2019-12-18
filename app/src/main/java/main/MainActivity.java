@@ -1,18 +1,17 @@
-package com;
+package main;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 
 import com.datastructuredemo.R;
 
-import math.Sort;
-import linklist.single.SinglyLinkedlist;
+import binarytree.BinaryTree;
+import linklist.singlelink.SingleLinkedList;
 
 public class MainActivity extends AppCompatActivity {
+
     private String TAG = getClass().getSimpleName();
-    private SinglyLinkedlist list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,9 +22,11 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.test).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d(TAG, "onClick: 翻转字符串="+Sort.reversalCharsForStack("liuxingrong"));
+                //Log.d(TAG, "onClick: 翻转字符串=" + Sort.reversalCharsForStack("liuxingrong"));
+                BinaryTree.binaryTreeTest();
             }
         });
+
 
 //        list = new SinglyLinkedlist(); //创建一个链表
 //        list.addNode(new Node(0));
@@ -38,9 +39,19 @@ public class MainActivity extends AppCompatActivity {
 //        }
 //
 //        //单链表反转测试
-//        LinkReverseTest linkReverseTest =new LinkReverseTest();
-//        linkReverseTest.reverse();
+//        LinkReverse linkReverse = new LinkReverse();
+//        linkReverse.reverseLink();
 
+        SingleLinkedList linkedList = new SingleLinkedList();
+        for (int i = 0; i < 10; i++) {
+            linkedList.addHeader(i);
+        }
+        //反转前
+        linkedList.display();
+        //反转
+        linkedList.reverse();
+
+        linkedList.display();
     }
 
 }

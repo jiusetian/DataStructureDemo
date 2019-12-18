@@ -34,7 +34,7 @@ public class BinaryTree implements Tree {
             Node parentNode = null;
             while (current != null) {
                 parentNode = current;
-                if (current.data > data) {//当前值比插入值大，搜索左子节点
+                if (data < current.data ) {//当前值比插入值大，搜索左子节点
                     current = current.leftChild;
                     if (current == null) {//左子节点为空，直接将新值插入到该节点
                         parentNode.leftChild = newNode;
@@ -52,30 +52,32 @@ public class BinaryTree implements Tree {
         return false;
     }
 
+    public Node getRoot(){return root;}
+
     //中序遍历
-    public void infixOrder(Node current) {
-        if (current != null) {
-            infixOrder(current.leftChild);
-            System.out.print(current.data + " ");
-            infixOrder(current.rightChild);
+    public void infixOrder(Node rootNode) {
+        if (rootNode != null) {
+            infixOrder(rootNode.leftChild);
+            System.out.print(rootNode.data + " ");
+            infixOrder(rootNode.rightChild);
         }
     }
 
     //前序遍历
-    public void preOrder(Node current) {
-        if (current != null) {
-            System.out.print(current.data + " ");
-            infixOrder(current.leftChild);
-            infixOrder(current.rightChild);
+    public void preOrder(Node rootNode) {
+        if (rootNode != null) {
+            System.out.print(rootNode.data + " ");
+            preOrder(rootNode.leftChild);
+            preOrder(rootNode.rightChild);
         }
     }
 
     //后序遍历
-    public void postOrder(Node current) {
-        if (current != null) {
-            infixOrder(current.leftChild);
-            infixOrder(current.rightChild);
-            System.out.print(current.data + " ");
+    public void postOrder(Node rootNode) {
+        if (rootNode != null) {
+            postOrder(rootNode.leftChild);
+            postOrder(rootNode.rightChild);
+            System.out.print(rootNode.data + " ");
         }
     }
 
@@ -188,16 +190,32 @@ public class BinaryTree implements Tree {
 
     public static void binaryTreeTest() {
         BinaryTree bt = new BinaryTree();
-        bt.insert(50);
-        bt.insert(20);
-        bt.insert(80);
-        bt.insert(10);
-        bt.insert(30);
-        bt.insert(60);
-        bt.insert(90);
-        bt.insert(25);
-        bt.insert(85);
-        bt.insert(100);
+//        bt.insert(50);
+//        bt.insert(20);
+//        bt.insert(50);
+//        bt.insert(80);
+//        bt.insert(10);
+//        bt.insert(30);
+//        bt.insert(60);
+//        bt.insert(90);
+//        bt.insert(25);
+//        bt.insert(85);
+//        bt.insert(100);
+        bt.insert(1);
+        bt.insert(2);
+        bt.insert(3);
+        bt.insert(4);
+        bt.insert(5);
+        bt.insert(6);
+        //中序遍历
+        bt.infixOrder(bt.getRoot());
+        System.out.println();
+        //前
+        bt.preOrder(bt.getRoot());
+        System.out.println();
+        //后
+        bt.postOrder(bt.getRoot());
+        System.out.println();
         bt.delete(10);//删除没有子节点的节点
         bt.delete(30);//删除有一个子节点的节点
         bt.delete(80);//删除有两个子节点的节点
@@ -205,7 +223,26 @@ public class BinaryTree implements Tree {
         System.out.println(bt.findMin().data);
         System.out.println(bt.find(100));
         System.out.println(bt.find(200));
+        System.out.println(bt.find(50));
 
     }
+
+    public class Node {
+
+        public int data;    //节点数据
+        public Node leftChild; //左子节点的引用
+        public Node rightChild; //右子节点的引用
+
+        //打印节点内容
+        public void display() {
+            System.out.println(data);
+        }
+
+        public Node(int data) {
+            this.data = data;
+        }
+    }
+
 }
+
 

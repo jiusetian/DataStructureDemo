@@ -1,4 +1,4 @@
-package math;
+package arith;
 
 import java.util.Stack;
 
@@ -9,11 +9,15 @@ public class Sort {
 
     private static String TAG = "tag";
 
+
+
     /**
      * 冒泡排序法
      * 逻辑思路：从第一个开始和后面的数据比较， 把大的那个数往后放，这样比较一轮以后，第一个就是最大数了
      * 然后进行第二轮比较，也是从第一个数开始，但是比较到倒数第二个结束
      * 以此类推比较，最后排出顺序来
+     *
+     * 平均时间复杂度O(n²)
      *
      * @param arry
      * @return

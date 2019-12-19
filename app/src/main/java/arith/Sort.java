@@ -374,18 +374,14 @@ public class Sort {
         int gap = array.length / 2;
 
         while (gap > 0) {
-
             int current; //基准元素
             int pos; //插入位置
             //
             for (int i = gap; i < array.length; i++) {
-
                 current = array[i];
                 pos = i;
-
                 //分组的插入排序，j为分组中元素在数组中的下标值，因为分组元素下标其实是间隔gap大小的，所以每次的下一个分组元素的下标是j-gap
                 for (int j = i - gap; j >= 0; j -= gap) {
-
                     if (current < array[j]) { //移位
                         array[j + gap] = array[j];
                         pos = j;
@@ -442,7 +438,6 @@ public class Sort {
         int index = 0; //记录结果数组保存到哪里了
         //首先对比左右数组的大小，将小的元素复制到result中
         for (int i = 0, j = 0; i < left.length && j < right.length; ) {
-
             if (left[i] > right[j]) {
                 result[index++] = right[j++];
                 r++;

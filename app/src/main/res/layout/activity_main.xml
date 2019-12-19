@@ -16,7 +16,17 @@
         android:id="@+id/test"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="点击测试"
+        android:text="点击测试01"
+        android:padding="10dp"
+        android:textSize="16sp"
+        android:layout_centerInParent="true"
+        />
+    <Button
+        android:id="@+id/test2"
+        android:layout_below="@+id/test"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="点击测试02"
         android:padding="10dp"
         android:textSize="16sp"
         android:layout_centerInParent="true"

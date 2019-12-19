@@ -13,6 +13,16 @@ public class SortTest {
     public void bubbleTest() {
         Log.d(TAG, "bubbleTest: 进行排序");
         int[] array = new int[]{2, 54, 23, 6, 23, 1, 0, -1, 7, 34, 4};
+        int[] sort = Sort.bubbleSort(array);
+        for (int i : sort) {
+            Log.d(TAG, "bubbleTest: 排序后的数据=" + i);
+        }
+    }
+
+    //冒泡排序
+    public void bubbleTest2() {
+        Log.d(TAG, "bubbleTest: 进行排序");
+        int[] array = new int[]{2, 54, 23, 6, 23, 1, 0, -1, 7, 34, 4};
         int[] sort = Sort.bubbleSort2(array);
         for (int i : sort) {
             Log.d(TAG, "bubbleTest: 排序后的数据=" + i);

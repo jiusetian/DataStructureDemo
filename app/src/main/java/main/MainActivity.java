@@ -6,7 +6,7 @@ import android.view.View;
 
 import com.datastructuredemo.R;
 
-import arith.SortTest;
+import arith.SearchTest;
 import linklist.singlelink.SingleLinkedList;
 
 public class MainActivity extends AppCompatActivity {
@@ -25,10 +25,31 @@ public class MainActivity extends AppCompatActivity {
                 //Log.d(TAG, "onClick: 翻转字符串=" + Sort.reversalCharsForStack("liuxingrong"));
                 //BinaryTree.binaryTreeTest();
               // new SortTest().insertTest();
-               new SortTest().mergeSort();
+              // new SortTest().mergeSort();
+//                SortTest sortTest=new SortTest();
+//                for (int i=0;i<10000;i++){
+//                    sortTest.bubbleTest();
+//                }
+               // SearchTest.binarySearch();
+
+                SearchTest.insertSearch();
             }
         });
 
+
+        findViewById(R.id.test2).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Log.d(TAG, "onClick: 翻转字符串=" + Sort.reversalCharsForStack("liuxingrong"));
+                //BinaryTree.binaryTreeTest();
+                // new SortTest().insertTest();
+                //new SortTest().mergeSort();
+//                SortTest sortTest=new SortTest();
+//                for (int i=0;i<10000;i++){
+//                    sortTest.bubbleTest2();
+//                }
+            }
+        });
 
 //        list = new SinglyLinkedlist(); //创建一个链表
 //        list.addNode(new Node(0));

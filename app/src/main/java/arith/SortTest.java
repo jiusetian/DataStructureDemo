@@ -47,4 +47,13 @@ public class SortTest {
             Log.d(TAG, "bubbleTest: 排序后的数据=" + i);
         }
     }
+
+    public void mergeSort(){
+        Log.d(TAG, "bubbleTest: 进行排序");
+        int[] array = new int[]{2, 4, 3, 1, 7, 9, 11,3025,35,5234,523,54,23,456, 8, 11, 5, 10, 12};
+        int[] sort = Sort.mergeSort2(array);
+        for (int i : sort) {
+            Log.d(TAG, "bubbleTest: 排序后的数据=" + i);
+        }
+    }
 }

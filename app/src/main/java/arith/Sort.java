@@ -1,5 +1,6 @@
 package arith;
 
+import java.util.Arrays;
 import java.util.Stack;
 
 /**
@@ -316,7 +317,6 @@ public class Sort {
 
 
     /**
-     *
      * @param array
      * @return
      */
@@ -401,6 +401,109 @@ public class Sort {
         }
 
         return array;
+    }
+
+    /**
+     * 归并排序
+     * <p>
+     * 基本思想：通过合并有序的两个数组的方式来进行排序，合并出来的就是有序的一个数组了。这里用到递归的思想，不断地将数组劈成两半，直到数组的大小小于2结束递归，
+     * 返回的时候依次执行将两半的数组合并排序，这种递归用图来表示有点像满二叉树的感觉，从一个数组作为根数组出发，分为两个子数组，然后每个子数组又分为两个子数组，
+     * 直到不能再分了，就开始执行合并函数，合并函数返回一个排好序的数组，跟它的另一个排好序的兄弟数组再合并，依次类推直到根数组
+     * <p>
+     * 合并两个数组的函数的逻辑：
+     * 1.将左数组的元素跟右数组的元素进行比较，然后比较出来的小的数组保存到result数组中，当左数组或右数组已经比较完毕的时候，就将剩下的另外一个数组的元素依次
+     * 保存到result数组中，因为本来左数组和右数组都是有序的，所以这种合并出来的结果也是一个有序的数组
+     *
+     * @param array
+     * @return
+     */
+    public static int[] mergeSort2(int[] array) {
+        if (array.length < 2) return array;
+        int mid = array.length / 2;
+        int[] left = Arrays.copyOfRange(array, 0, mid);
+        int[] right = Arrays.copyOfRange(array, mid, array.length);
+        return merge2(mergeSort2(left),mergeSort2(right));
+    }
+
+    /**
+     * 将两个有序的数组合并成一个有序的数组
+     * 算法思路：
+     * 1.
+     *
+     * @param left
+     * @param right
+     * @return
+     */
+    public static int[] merge2(int[] left, int[] right) {
+        int[] result = new int[left.length + right.length];
+
+        int l = 0; //记录左数组被读到哪里
+        int r = 0; //记录右数组被读到哪里
+        int index = 0; //记录结果数组保存到哪里了
+        //首先对比左右数组的大小，将小的元素复制到result中
+        for (int i = 0, j = 0; i < left.length && j < right.length; ) {
+
+            if (left[i] > right[j]) {
+                result[index++] = right[j++];
+                r++;
+            } else {
+                result[index++] = left[i++];
+                l++;
+            }
+        }
+
+        if (l == left.length ) { //剩下右数组
+            while (index < result.length) {
+                result[index++] = right[r++];
+            }
+        } else { //剩下左数组
+            while (index < result.length) {
+                result[index++] = left[l++];
+            }
+        }
+        return result;
+
+    }
+
+    /**
+     * 归并排序
+     *
+     * @param array
+     * @return
+     */
+    public static int[] mergeSort(int[] array) {
+        if (array.length < 2) return array;
+        int mid = array.length / 2;
+        int[] left = Arrays.copyOfRange(array, 0, mid);
+        int[] right = Arrays.copyOfRange(array, mid, array.length);
+        //递归调用，每个参数又是一个递归，每次都把切割的左右数组再次切割进行递归，直到数组的长度小于2返回结束递归调用
+        return merge(mergeSort(left), mergeSort(right));
+    }
+
+    /**
+     * 归并排序——将两段排序好的数组结合成一个排序数组
+     *
+     * @param left
+     * @param right
+     * @return
+     */
+    public static int[] merge(int[] left, int[] right) {
+
+        int[] result = new int[left.length + right.length];
+
+        for (int index = 0, i = 0, j = 0; index < result.length; index++) {
+            if (i >= left.length) {
+                result[index] = right[j++];
+            } else if (j >= right.length) {
+                result[index] = left[i++];
+            } else if (left[i] > right[j]) {
+                result[index] = right[j++];
+            } else {
+                result[index] = left[i++];
+            }
+
+        }
+        return result;
     }
 
 }

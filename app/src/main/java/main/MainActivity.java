@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
                 //Log.d(TAG, "onClick: 翻转字符串=" + Sort.reversalCharsForStack("liuxingrong"));
                 //BinaryTree.binaryTreeTest();
               // new SortTest().insertTest();
-               new SortTest().shellSort();
+               new SortTest().mergeSort();
             }
         });
 

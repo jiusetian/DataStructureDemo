@@ -103,6 +103,7 @@ public class LinearProbingHashTable {
     //查找数据项
     public DataItem find(int key) {
         int hashVal = hashFunction(key);
+
         while (hashArray[hashVal] != null) {
             if (hashArray[hashVal].getKey() == key) {
                 return hashArray[hashVal];

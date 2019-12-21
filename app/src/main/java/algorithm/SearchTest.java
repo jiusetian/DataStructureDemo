@@ -1,4 +1,4 @@
-package arith;
+package algorithm;
 
 import android.util.Log;
 

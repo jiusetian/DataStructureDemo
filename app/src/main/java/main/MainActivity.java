@@ -6,7 +6,7 @@ import android.view.View;
 
 import com.datastructuredemo.R;
 
-import arith.SearchTest;
+import binarytree.BinaryTree;
 import linklist.singlelink.SingleLinkedList;
 
 public class MainActivity extends AppCompatActivity {
@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //Log.d(TAG, "onClick: 翻转字符串=" + Sort.reversalCharsForStack("liuxingrong"));
-                //BinaryTree.binaryTreeTest();
+                BinaryTree.binaryTreeTest();
               // new SortTest().insertTest();
               // new SortTest().mergeSort();
 //                SortTest sortTest=new SortTest();
@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
 //                }
                // SearchTest.binarySearch();
 
-                SearchTest.insertSearch();
+               // SearchTest.insertSearch();
             }
         });
 

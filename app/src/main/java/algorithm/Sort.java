@@ -1,4 +1,4 @@
-package arith;
+package algorithm;
 
 import java.util.Arrays;
 import java.util.Stack;

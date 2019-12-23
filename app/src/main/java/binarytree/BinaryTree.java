@@ -9,6 +9,8 @@ package binarytree;
  */
 public class BinaryTree implements Tree {
 
+    String TAG = "tag";
+
     //表示根节点
     private Node root;
 
@@ -20,7 +22,7 @@ public class BinaryTree implements Tree {
                 current = current.leftChild;
             } else if (current.data < data) { //当前值比查找值小，搜索右子树
                 current = current.rightChild;
-            } else if (current.data==data){
+            } else if (current.data == data) {
                 return current;
             }
         }
@@ -30,7 +32,7 @@ public class BinaryTree implements Tree {
 
     /**
      * 插入节点
-     *
+     * <p>
      * 1.有一个当前节点，初始值为根节点
      * 2.当根节点为null，直接插入作为根节点
      * 3.如果插入值小于当前节点，则去左子树查找插入位置，如果插入值大于当前节点，则去右子树查找插入位置
@@ -90,6 +92,7 @@ public class BinaryTree implements Tree {
      * 2.在递归的层次关系中，下一层逻辑单元的返回值（也可以没有返回值）是上一层逻辑单元执行的某个条件
      * 3.逻辑单元的执行在特定的时候，有结束执行的条件
      * 4.递归的特征就是一层嵌套一层的调用，外层方法包含了被嵌套的内存方法，调用顺序是从外层依次到内层，方法结束顺序是从内层依次到外层
+     *
      * @param rootNode
      */
     public void preOrder(Node rootNode) {
@@ -132,17 +135,18 @@ public class BinaryTree implements Tree {
     }
 
     @Override
-    public boolean delete(int key) {
-        Node current = root;
-        Node parent = root;
-        boolean isLeftChild = false;
+    public boolean delete(int data) {
+        Node current = root; //当前要删除的节点
+        Node parent = root; //删除节点的父节点
+        boolean isLeftChild = false; //被删除节点是否为父节点的左节点
+
         //查找删除值，找不到直接返回false
-        while (current.data != key) {
+        while (current.data != data) {
             parent = current;
-            if (current.data > key) {
+            if (data < current.data) {
                 isLeftChild = true;
                 current = current.leftChild;
-            } else {
+            } else if (data > current.data) {
                 isLeftChild = false;
                 current = current.rightChild;
             }
@@ -150,7 +154,8 @@ public class BinaryTree implements Tree {
                 return false;
             }
         }
-        //如果当前节点没有子节点
+
+        //如果被删除节点没有子节点
         if (current.leftChild == null && current.rightChild == null) {
             if (current == root) {
                 root = null;
@@ -160,9 +165,9 @@ public class BinaryTree implements Tree {
                 parent.rightChild = null;
             }
             return true;
-
-            //当前节点有一个子节点，右子节点
-        } else if (current.leftChild == null && current.rightChild != null) {
+        }
+        //被删除节点有一个子节点（右子节点）
+        else if (current.leftChild == null && current.rightChild != null) {
             if (current == root) {
                 root = current.rightChild;
             } else if (isLeftChild) {
@@ -171,8 +176,9 @@ public class BinaryTree implements Tree {
                 parent.rightChild = current.rightChild;
             }
             return true;
-            //当前节点有一个子节点，左子节点
-        } else if (current.leftChild != null && current.rightChild == null) {
+        }
+        //被删除节点有一个子节点（左子节点）
+        else if (current.leftChild != null && current.rightChild == null) {
             if (current == root) {
                 root = current.leftChild;
             } else if (isLeftChild) {
@@ -181,38 +187,52 @@ public class BinaryTree implements Tree {
                 parent.rightChild = current.leftChild;
             }
             return true;
-        } else {
-            //当前节点存在两个子节点
-            Node successor = delNodeWithTwoNodes(current);
-            if (current == root) {
-                successor = root;
-            } else if (isLeftChild) {
+        }
+        //被删除节点存在两个子节点
+        else if (current.leftChild != null && current.rightChild != null) {
+            Node successor = delNodeWithTwoNodes(current); //返回后继节点
+
+            if (current == root) { //被删除节点为根节点
+                root = successor;
+            } else if (isLeftChild) { //被删除节点为父节点的左节点
                 parent.leftChild = successor;
-            } else {
+            } else { //
                 parent.rightChild = successor;
             }
+            //设置后继节点的左节点为被删除节点的左节点
             successor.leftChild = current.leftChild;
-        }
-        return false;
+            //设置后继节点的右节点为被删除节点的右节点
+            successor.rightChild = current.rightChild;
 
+        }
+
+        return false;
     }
 
-    //删除节点有两个子节点
+    //返回后继节点
     public Node delNodeWithTwoNodes(Node delNode) {
-        Node successorParent = delNode;
-        Node successor = delNode;
-        Node current = delNode.rightChild;
+        Node successorParent = delNode; //后继节点的父节点
+        Node successor = delNode; //后继节点
+        Node current = delNode.rightChild; //当前被遍历的节点，从被删除节点的右节点开始遍历
+        //找到后继节点
         while (current != null) {
             successorParent = successor;
             successor = current;
             current = current.leftChild;
         }
-        //后继节点不是删除节点的右子节点，将后继节点替换删除节点
-        if (successor != delNode.rightChild) {
-            successorParent.leftChild = successor.rightChild;
-            successor.rightChild = delNode.rightChild;
-        }
 
+        //后继节点为被删除节点的右节点，直接返回后继节点
+        if (successor == delNode.rightChild) {
+            return successor;
+        }
+        //后继节点不是被删除节点的右节点，并且它的右节点为null
+        else if (successor.rightChild == null) {
+            successorParent.leftChild = null;
+        }
+        //后继节点不是被删除节点的右节点，并且它的右节点不为null
+        else if (successor.rightChild != null) {
+            successorParent.leftChild = successor.rightChild;
+        }
         return successor;
     }
 
@@ -239,11 +259,15 @@ public class BinaryTree implements Tree {
 //        bt.infixOrder(bt.getRoot());
 //        System.out.println();
         //前
-  //      bt.preOrder(bt.getRoot());
-     //   System.out.println();
+        //      bt.preOrder(bt.getRoot());
+        //   System.out.println();
 //        //后
         bt.postOrder(bt.getRoot());
         System.out.println();
+        bt.delete(4);
+        bt.postOrder(bt.getRoot());
+        System.out.println();
+
         bt.delete(10);//删除没有子节点的节点
         bt.delete(30);//删除有一个子节点的节点
         bt.delete(80);//删除有两个子节点的节点
